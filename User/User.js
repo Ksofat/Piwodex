@@ -16,18 +16,20 @@ const Tab = createBottomTabNavigator();
 
 const PiwodexStack = createNativeStackNavigator();
 
-function PiwodexStackNavigator() {
+function PiwodexStackNavigator({ route }) {
+    const { userData } = route.params;    
     return (
       <PiwodexStack.Navigator>
-        <PiwodexStack.Screen name="Piwodexlist" component={Piwodex} options={{ headerShown: false }}/>
-        <PiwodexStack.Screen name="Camera" component={Camera} options={{ headerShown: false }}/>
+        <PiwodexStack.Screen name="Piwodexlist" component={Piwodex} options={{ headerShown: false }} initialParams={{ userData: userData }}/>
+        <PiwodexStack.Screen name="Camera" component={Camera} options={{ headerShown: false }} initialParams={{ userData: userData }}/>
       </PiwodexStack.Navigator>
     );
   }
 
 
-export default function UserScreen(){
+export default function UserScreen( {route} ){
 
+const { userData } = route.params;    
 
 return (
     <NavigationContainer independent={true}>
@@ -60,9 +62,9 @@ return (
         })}>
 
         <Tab.Screen name="Mapy" component = {Mapy}/>
-        <Tab.Screen name="Piwodex" component = {PiwodexStackNavigator}/>
+        <Tab.Screen name="Piwodex" component = {PiwodexStackNavigator} initialParams={{ userData }}/>
         <Tab.Screen name="Dyskusje" component = {Dyskusje}/>
-        <Tab.Screen name="Profil" component = {Profil}/>
+        <Tab.Screen name="Profil" component = {Profil} initialParams={{ userData }}/>
         <Tab.Screen name="Ranking" component = {Ranking}/>
 
         </Tab.Navigator>

@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Achievements API
+  version: 1.0.0
+  description: API for managing achievements in the database.
+tags:
+  - name: Achievements
+    description: Operations related to achievements
+servers:
+  - url: http://localhost:3000/api
+    description: Development server
+
+paths:
+  /achievements:
+    post:
+      tags:
+        - Achievements
+      summary: Create a new achievement
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Description
+                - TierRequired
+              properties:
+                Description:
+                  type: string
+                TierRequired:
+                  type: string
+      responses:
+        201:
+          description: Achievement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Achievement'
+        500:
+          description: Server error
+
+    get:
+      tags:
+        - Achievements
+      summary: Get all achievements
+      responses:
+        200:
+          description: A list of all achievements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Achievement'
+        500:
+          description: Server error
+
+  /achievements/{id}:
+    get:
+      tags:
+        - Achievements
+      summary: Get a single achievement by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Achievement found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Achievement'
+        404:
+          description: Achievement not found
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - Achievements
+      summary: Update an achievement by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Achievement'
+      responses:
+        200:
+          description: Achievement updated successfully
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - Achievements
+      summary: Delete an achievement by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Achievement deleted successfully
+        500:
+          description: Server error
+
+components:
+  schemas:
+    Achievement:
+      type: object
+      properties:
+        AchievementID:
+          type: integer
+        Description:
+          type: string
+        TierRequired:
+          type: string

@@ -1,0 +1,127 @@
+paths:
+  /stores:
+    post:
+      tags:
+        - Stores
+      summary: Create a new store
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StoreName
+                - LocationX
+                - LocationY
+              properties:
+                StoreName:
+                  type: string
+                LocationX:
+                  type: number
+                  format: float
+                LocationY:
+                  type: number
+                  format: float
+      responses:
+        201:
+          description: Store created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        500:
+          description: Server error
+
+    get:
+      tags:
+        - Stores
+      summary: Get all stores
+      responses:
+        200:
+          description: A list of all stores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+        500:
+          description: Server error
+
+  /stores/{id}:
+    get:
+      tags:
+        - Stores
+      summary: Get a single store by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Store found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        404:
+          description: Store not found
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - Stores
+      summary: Update a store by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Store'
+      responses:
+        200:
+          description: Store updated successfully
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - Stores
+      summary: Delete a store by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Store deleted successfully
+        500:
+          description: Server error
+
+components:
+  schemas:
+    Store:
+      type: object
+      properties:
+        StoreID:
+          type: integer
+        StoreName:
+          type: string
+        LocationX:
+          type: number
+          format: float
+        LocationY:
+          type: number
+          format: float

@@ -1,0 +1,135 @@
+paths:
+  /beers:
+    post:
+      tags:
+        - Beers
+      summary: Create a new beer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - BeerName
+                - BarCode
+                - Tier
+                - BeerImage
+                - AlcoholContent
+              properties:
+                BeerName:
+                  type: string
+                BarCode:
+                  type: string
+                Tier:
+                  type: string
+                BeerImage:
+                  type: string
+                  format: binary
+                AlcoholContent:
+                  type: integer
+      responses:
+        201:
+          description: Beer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beer'
+        500:
+          description: Error message
+
+    get:
+      tags:
+        - Beers
+      summary: Get all beers
+      responses:
+        200:
+          description: A list of all beers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Beer'
+        500:
+          description: Error message
+
+  /beers/{id}:
+    get:
+      tags:
+        - Beers
+      summary: Get a single beer by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Beer found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Beer'
+        404:
+          description: Beer not found
+        500:
+          description: Error message
+
+    put:
+      tags:
+        - Beers
+      summary: Update a beer by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Beer'
+      responses:
+        200:
+          description: Beer updated successfully
+        500:
+          description: Error message
+
+    delete:
+      tags:
+        - Beers
+      summary: Delete a beer by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Beer deleted successfully
+        500:
+          description: Error message
+
+components:
+  schemas:
+    Beer:
+      type: object
+      properties:
+        BeerID:
+          type: integer
+        BeerName:
+          type: string
+        BarCode:
+          type: string
+        Tier:
+          type: string
+        BeerImage:
+          type: string
+          format: binary
+        AlcoholContent:
+          type: integer

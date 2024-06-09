@@ -1,0 +1,130 @@
+paths:
+  /discussions:
+    post:
+      tags:
+        - Discussions
+      summary: Create a new discussion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Message
+                - ModifiedDate
+                - UserID
+                - StoreID
+              properties:
+                Message:
+                  type: string
+                ModifiedDate:
+                  type: string
+                  format: date-time
+                UserID:
+                  type: integer
+                StoreID:
+                  type: integer
+      responses:
+        201:
+          description: Discussion created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discussion'
+        500:
+          description: Server error
+
+    get:
+      tags:
+        - Discussions
+      summary: Get all discussions
+      responses:
+        200:
+          description: A list of all discussions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Discussion'
+        500:
+          description: Server error
+
+  /discussions/{id}:
+    get:
+      tags:
+        - Discussions
+      summary: Get a single discussion by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Discussion found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Discussion'
+        404:
+          description: Discussion not found
+        500:
+          description: Server error
+
+    put:
+      tags:
+        - Discussions
+      summary: Update a discussion by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Discussion'
+      responses:
+        200:
+          description: Discussion updated successfully
+        500:
+          description: Server error
+
+    delete:
+      tags:
+        - Discussions
+      summary: Delete a discussion by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Discussion deleted successfully
+        500:
+          description: Server error
+
+components:
+  schemas:
+    Discussion:
+      type: object
+      properties:
+        DiscussionID:
+          type: integer
+        Message:
+          type: string
+        ModifiedDate:
+          type: string
+          format: date-time
+        UserID:
+          type: integer
+        StoreID:
+          type: integer

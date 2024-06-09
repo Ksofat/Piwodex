@@ -61,9 +61,9 @@ return (
             }
         })}>
 
-        <Tab.Screen name="Mapy" component = {Mapy}/>
+        <Tab.Screen name="Mapy" component = {Mapy} initialParams={{ userData }}/>
         <Tab.Screen name="Piwodex" component = {PiwodexStackNavigator} initialParams={{ userData }}/>
-        <Tab.Screen name="Dyskusje" component = {Dyskusje}/>
+        <Tab.Screen name="Dyskusje" component = {Dyskusje} initialParams={{ userData }}/>
         <Tab.Screen name="Profil" component = {Profil} initialParams={{ userData }}/>
         <Tab.Screen name="Ranking" component = {Ranking}/>
 

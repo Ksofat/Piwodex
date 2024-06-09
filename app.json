@@ -25,12 +25,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "android": {
-        "permissions": ["CAMERA"]
-      }
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION"
+      ],
+      "package": "com.holyshinx.piwodex"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
     }
   }
 }

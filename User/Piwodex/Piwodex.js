@@ -24,7 +24,7 @@ export default function PiwodexScreen( {route} ){
     const fetchBeerDetails = async (beerId) => {
         console.log("Fetching details for beer ID:", beerId);  // Log the beer ID
         try {
-            const response = await fetch(`http://192.168.8.113:3000/api/beers_all/${beerId}`);
+            const response = await fetch(`https://pajace.azurewebsites.net/api/beers_all/${beerId}`);
             if (response.ok) {
                 const data = await response.json();
                 return data;
@@ -39,7 +39,7 @@ export default function PiwodexScreen( {route} ){
     
     const fetchCollectedBeers = async (userId) => {
         try {
-            const response = await fetch(`http://192.168.8.113:3000/api/collectedBeers/user/${userId}`);
+            const response = await fetch(`https://pajace.azurewebsites.net/api/collectedBeers/user/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 console.log("Fetched collected beers for user ID:", userId, data);

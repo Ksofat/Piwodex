@@ -28,7 +28,7 @@ export default function LoginScreen() {
 
     const handleLoginPress = async () => {
         try {
-            const response = await fetch('http://192.168.8.113:3000/api/users/login', {
+            const response = await fetch('https://pajace.azurewebsites.net/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

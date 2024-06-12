@@ -47,7 +47,7 @@ const handleRegisterPress = async () => {
     
     // Send data to the server
     try {
-        const response = await fetch('http://192.168.137.1:3000/api/users', {
+        const response = await fetch('https://pajace.azurewebsites.net/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

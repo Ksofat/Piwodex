@@ -16,7 +16,7 @@ export default function RankingScreen(){
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('http://192.168.8.113:3000/api/users')
+        fetch('https://pajace.azurewebsites.net/api/users')
         .then(response => {
             console.log(response); // Log the response object
             return response.text(); // Use text() to see what is actually being returned

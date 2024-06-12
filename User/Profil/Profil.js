@@ -16,10 +16,10 @@ export default function ProfilScreen({ route }) {
     const fetchAchievementsData = async () => {
         setIsLoading(true);
         try {
-            const userAchievementsResponse = await fetch('http://192.168.8.113:3000/api/userAchievements');
+            const userAchievementsResponse = await fetch('https://pajace.azurewebsites.net/api/userAchievements');
             const userAchievements = await userAchievementsResponse.json();
     
-            const achievementsResponse = await fetch('http://192.168.8.113:3000/api/achievements');
+            const achievementsResponse = await fetch('https://pajace.azurewebsites.net/api/achievements');
             const achievements = await achievementsResponse.json();
     
             // Filter userAchievements by user_id

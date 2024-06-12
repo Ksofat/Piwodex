@@ -12,7 +12,7 @@ export default function MapyScreen({ route }){
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    fetch(`http://192.168.8.113:3000/api/stores/visited/${user.user_id}`)
+    fetch(`https://pajace.azurewebsites.net/api/stores/visited/${user.user_id}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
